@@ -15,7 +15,7 @@ const layoutStore = useLayoutStore();
       <RouterLink class="logo" to="/" />
       <!-- 导航区域 -->
       <ul class="app-header-nav ">
-        <li class="home" v-for="(value) in layoutStore.categoryList" :key="value"> <RouterLink to="/">{{value.name}}</RouterLink> </li>
+        <li class="home" v-for="(value) in layoutStore.categoryList" :key="value"> <RouterLink :to="`/category/${value.id}`">{{value.name}}</RouterLink> </li>
       </ul>
 
       <div class="right">

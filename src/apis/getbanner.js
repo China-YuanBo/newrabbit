@@ -38,3 +38,11 @@ export const findHotAPI = () => {
 }
 
 
+/**
+ * 获取商品
+ */
+export const findGoodsAPI = () => {
+  return httpInstance({
+    url: '/home/goods'
+  })
+}

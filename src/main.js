@@ -13,3 +13,8 @@ app.use(router)
 
 app.mount('#app')
 
+// 引入图片懒加载插件
+import lazyPlugin from '@/directives/index'
+app.use(lazyPlugin);
+
+
