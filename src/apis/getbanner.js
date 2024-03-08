@@ -6,9 +6,12 @@ import httpInstance from "@/utils/http.js";
  * @description:获取轮播图图片 
  * 
  */
-export function getbanner() {
+export function getbanner(distributionSite = 1) {
   return httpInstance({
-    url: '/home/banner'
+    url: '/home/banner',
+    params: {
+      distributionSite
+    }
   })
 
 }
