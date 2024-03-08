@@ -3,6 +3,9 @@ import { getTwoApi } from '@/apis/category';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { getbanner} from '@/apis/getbanner.js';
+import GoodsItem from '@/views/Home/components/GoodsItem.vue'
+
+import { onBeforeRouteUpdate } from 'vue-router';
 
 
 let route = useRoute();
@@ -22,6 +25,15 @@ async  function getbanners() {
 onMounted(()=> {
   getTwoList();
   getbanners();
+})
+
+onBeforeRouteUpdate((to,from,next )=> {
+ if(to.fullPath !== from.fullPath){
+  getTwoApi(to.params.id).then((res)=> {
+    twoCategoryList.value = res.result;
+  })
+ }
+ next()
 })
 
 </script>
@@ -44,6 +56,25 @@ onMounted(()=> {
       </el-carousel-item>
     </el-carousel>
   </div>
+  <div class="sub-list">
+  <h3>全部分类</h3>
+  <ul>
+    <li v-for="i in twoCategoryList.children" :key="i.id">
+      <RouterLink to="/">
+        <img :src="i.picture" />
+        <p>{{ i.name }}</p>
+      </RouterLink>
+    </li>
+  </ul>
+</div>
+<div class="ref-goods" v-for="item in twoCategoryList.children" :key="item.id">
+  <div class="head">
+    <h3>- {{ item.name }}-</h3>
+  </div>
+  <div class="body">
+    <GoodsItem v-for="good in item.goods" :good="good" :key="good.id" />
+  </div>
+</div>
   </div>
 </template>
 
@@ -61,6 +92,8 @@ onMounted(()=> {
   .sub-list {
     margin-top: 20px;
     background-color: #fff;
+    width: 1240px;
+  margin: 0 auto;
 
     ul {
       display: flex;
@@ -98,6 +131,8 @@ onMounted(()=> {
     background-color: #fff;
     margin-top: 20px;
     position: relative;
+    width: 1240px;
+  margin: 0 auto;
 
     .head {
       .xtx-more {

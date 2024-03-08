@@ -13,7 +13,7 @@ const layoutStore = useLayoutStore();
         <RouterLink to="/">小兔鲜</RouterLink>
       </h1>
       <ul class="app-header-nav">
-        <li class="home" v-for="(value) in layoutStore.categoryList" :key="value"> <RouterLink :to="`/category/${value.id}`">{{value.name}}</RouterLink> </li>
+        <li class="home" v-for="(value) in layoutStore.categoryList" :key="value"> <RouterLink :to="`/category/${value.id}`" active-class="active">{{value.name}}</RouterLink> </li>
       </ul>
       <div class="search">
         <i class="iconfont icon-search"></i>
