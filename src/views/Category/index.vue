@@ -1,40 +1,15 @@
 <script setup>
-import { getTwoApi } from '@/apis/category';
-import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
-import { getbanner} from '@/apis/getbanner.js';
+
+
 import GoodsItem from '@/views/Home/components/GoodsItem.vue'
+import {useBanner} from './composables/useBanner';
+import {useTwoList} from './composables/useTwoList';
 
-import { onBeforeRouteUpdate } from 'vue-router';
+
+let {bannerimg} = useBanner();
+let {twoCategoryList} = useTwoList();
 
 
-let route = useRoute();
-let twoCategoryList = ref({});
-
-const getTwoList = async ()=> {
-  const res = await getTwoApi(route.params.id);
-  twoCategoryList.value = res.result;
-}
-
-let bannerimg = ref([]);
-async  function getbanners() {
- let {result} = await getbanner(2);
- bannerimg.value = result;
-}
-
-onMounted(()=> {
-  getTwoList();
-  getbanners();
-})
-
-onBeforeRouteUpdate((to,from,next )=> {
- if(to.fullPath !== from.fullPath){
-  getTwoApi(to.params.id).then((res)=> {
-    twoCategoryList.value = res.result;
-  })
- }
- next()
-})
 
 </script>
 
@@ -60,7 +35,7 @@ onBeforeRouteUpdate((to,from,next )=> {
   <h3>全部分类</h3>
   <ul>
     <li v-for="i in twoCategoryList.children" :key="i.id">
-      <RouterLink to="/">
+      <RouterLink :to="`/category/sub/${i.id}`">
         <img :src="i.picture" />
         <p>{{ i.name }}</p>
       </RouterLink>
