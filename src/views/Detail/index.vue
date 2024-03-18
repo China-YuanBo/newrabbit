@@ -23,16 +23,16 @@ onMounted(()=> {
 
 <template>
   <div class="xtx-goods-page">
-    <div class="container">
+    <div class="container" >
       <!-- 面包屑部分 -->
       <div class="bread-container">
         <el-breadcrumb separator=">">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: '/' }">母婴
+          <el-breadcrumb-item :to="{ path: `/category/${detailData.categories?.[1].id}` }">{{detailData.categories?.[1].name}}
           </el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: '/' }">跑步鞋
+          <el-breadcrumb-item :to="{ path: `/category/sub/${detailData.categories?.[0].id}` }">{{detailData.categories?.[0].name}}
           </el-breadcrumb-item>
-          <el-breadcrumb-item>抓绒保暖，毛毛虫子儿童运动鞋</el-breadcrumb-item>
+          <el-breadcrumb-item>{{detailData.name}}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
       <!-- 商品信息 -->
@@ -46,22 +46,22 @@ onMounted(()=> {
               <ul class="goods-sales">
                 <li>
                   <p>销量人气</p>
-                  <p> 100+ </p>
+                  <p> {{detailData.salesCount}}+ </p>
                   <p><i class="iconfont icon-task-filling"></i>销量人气</p>
                 </li>
                 <li>
                   <p>商品评价</p>
-                  <p>200+</p>
+                  <p>{{detailData.commentCount}}+</p>
                   <p><i class="iconfont icon-comment-filling"></i>查看评价</p>
                 </li>
                 <li>
                   <p>收藏人气</p>
-                  <p>300+</p>
+                  <p>{{detailData.collectCount}}+</p>
                   <p><i class="iconfont icon-favorite-filling"></i>收藏商品</p>
                 </li>
                 <li>
                   <p>品牌信息</p>
-                  <p>400+</p>
+                  <p>{{detailData.brand?.name}}</p>
                   <p><i class="iconfont icon-dynamic-filling"></i>品牌主页</p>
                 </li>
               </ul>
